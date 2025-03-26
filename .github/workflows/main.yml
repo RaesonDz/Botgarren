@@ -1,1 +1,24 @@
-${{ secrets.TKN }}
+name: Deploy Deposit Bot
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy Web App
+        env:
+          BOT_TOKEN: ${{ secrets.TKN }}  # 🔥 يتم تمرير التوكن من الـ Secrets
+        run: echo "BOT_TOKEN is set"
